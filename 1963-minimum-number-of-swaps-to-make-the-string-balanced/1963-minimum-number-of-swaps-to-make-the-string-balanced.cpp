@@ -1,15 +1,33 @@
 class Solution {
 public:
-    int minSwaps(string s) {
-      int count=0,maxcount=0;
+    
+    
+     int minSwaps(string s) {
+      stack<char> st;
       for(int i=0;i<s.length();i++)
       {
-          if(s[i]==']')
-              count++;
-          else 
-              count--;
-          maxcount=max(maxcount,count);
+          if(s[i]=='[' )
+              st.push(s[i]);
+          else  
+          {
+              if(!st.empty() && st.top()=='[')
+                  st.pop();
+              else
+                  st.push(s[i]);
+          }
       }
-      return (maxcount+1)/2;
-    }
+      float a=0,b=0;
+      while(!st.empty())
+      {
+          if(st.top()=='[')
+              a++;
+          else
+              b++;
+          st.pop();
+      }
+      if(a<=b)
+          return (b-a)/2+ceil(a/2);
+       else
+          return (a-b)/2+ceil(a/2);
+     }
 };
