@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numFactoredBinaryTrees(vector<int>& arr) {
-        map<int ,long long int> mpp;
+        unordered_map<int ,long long int> mpp;
         sort(arr.begin(),arr.end());//to keep the array in sorted fashion only then could we apply 2 pointer approach
         int mod=pow(10,9)+7;
         for(int i=0;i<arr.size();i++)
