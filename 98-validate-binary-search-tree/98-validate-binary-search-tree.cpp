@@ -14,33 +14,23 @@
 class Solution {
 private:
     bool isBst(TreeNode *root,long long min,long long max)
-{
+   {
     if(root==NULL)
         return true;
-    if(root->val <= min || root->val >= max)
+    if(root->val <= min || root->val >= max)//if the root's value is not in the range
     {
         return false;
     }
+    /* if we are reaching till this point then it is in the range so check for left and 
+    right trees */
     return isBst(root->left,min,root->val) && isBst(root->right,root->val,max) ;
-}
-    // bool isBST(TreeNode *root,long long int min,long long int max)
-    // {
-    //     if(root==NULL)
-    //         return true;
-    //     if(root->val> min && root->val<max)
-    //     {
-    //          bool left=isBST(root->left,min,root->val);
-    //          bool right=isBST(root->right,root->val,max);
-    //          return left && right;
-    //     }
-    //     else
-    //     return false;
-    // }
+   }
+    
 public:
     bool isValidBST(TreeNode* root) {
         
-        long long minV = -30000000000;
-        long long maxV = 30000000000;
+        long long minV = -30000000000;//as values can be very large
+        long long maxV = 30000000000;//as values can be very large
         return isBst(root,minV,maxV);
         
     }
