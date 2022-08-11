@@ -11,7 +11,7 @@ bool helper(vector<int> nums,int start,int temp,vector<bool> &visited,int k,int 
       
     for(int i=start;i<nums.size();i++)
     {
-        if (i - 1 >= 0 && nums[i] == nums[i - 1] && !visited[i - 1]) 
+        if (i - 1 >= 0 && nums[i] == nums[i - 1] && !visited[i - 1]) //this made it work somehow
         continue;
         if(!visited[i] && temp>=nums[i])//checking if the node is visited
         {
