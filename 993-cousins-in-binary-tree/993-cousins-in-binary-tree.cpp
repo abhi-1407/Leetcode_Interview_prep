@@ -27,7 +27,7 @@ class Solution {
     }
 public:
     bool isCousins(TreeNode* root, int x, int y) {
-        if(root->val==x||root->val==y)
+        if(root->val==x||root->val==y)//if one of the nodes is the root node then return false as they can never be cousins 
         return false;
         pair<int,int> temp1={0,-1},temp2={0,-1};
         helper(root,temp1,x,0);
