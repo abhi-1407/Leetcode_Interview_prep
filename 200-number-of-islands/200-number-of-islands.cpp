@@ -27,7 +27,7 @@ class Solution {
            helper(grid,i,j-1);
        }
    }
-   int dfs(int i,int j,vector<vector<char>> grid)
+   int dfs(int i,int j,vector<vector<char>> &grid)
    {
        int count=0;
        for(int i=0;i<grid.size();i++)
