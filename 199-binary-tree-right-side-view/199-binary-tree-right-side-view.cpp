@@ -14,13 +14,13 @@ class Solution {
     {
         if(root==NULL)
             return;
-      
-        h(level+1,root->right,mpp);
-        h(level+1,root->left,mpp);
         if(mpp.find(level)==mpp.end())
         {
             mpp[level]=root->val;
         } 
+        h(level+1,root->right,mpp);
+        h(level+1,root->left,mpp);
+        
         
     }
 public:
