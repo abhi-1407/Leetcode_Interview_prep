@@ -9,47 +9,42 @@
  * };
  */
 class Solution {
-    class compare{
+ class compare{
     public:
     bool operator()(ListNode *a,ListNode *b)
     {
         return a->val > b->val;
     }  
-    };    
+    }; 
 public:
-    ListNode* mergeKLists(vector<ListNode*>& lists)
-    {
-        priority_queue<ListNode*,vector<ListNode*>,compare> pq;
-        int len=lists.size();
-        if(len==0)
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size()==0)
             return NULL;
-        for(int i=0;i<len;i++)
+        priority_queue<ListNode*,vector<ListNode *>,compare> pq;
+        for(int i=0;i<lists.size();i++)
         {
-            if(lists[i])//push the lists only if they are non empty
+            if(lists[i])
             pq.push(lists[i]);
         }
-        
-        ListNode *head=NULL,*tail=NULL;
+        ListNode *head=NULL,*n=NULL;
         while(!pq.empty())
         {
             ListNode *temp=pq.top();
             pq.pop();
-            
-            if(temp->next!=NULL)
+            if(temp->next)
             pq.push(temp->next);
-            
             if(head==NULL)
             {
-                head=temp;
-                tail=temp;
-            }
+                 head=temp;
+                 n=temp;
+            }  
             else
             {
-                tail->next=temp;//connecting the new node
-                tail=temp;//moving tail to the new node to form a linked list
+                n->next=temp;
+                n=n->next;                
             }
+           
         }
         return head;
-    }   
-
+    }
 };
