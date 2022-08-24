@@ -26,8 +26,8 @@ bool helper(TreeNode *root,long long min,long long max)
  }
 public:
     bool isValidBST(TreeNode* root) {
-        long long  l=-3000000000;
-        long long r=3000000000;
+        long long  l=LONG_MIN;
+        long long r=LONG_MAX;
         return helper(root,l,r);
         
         
