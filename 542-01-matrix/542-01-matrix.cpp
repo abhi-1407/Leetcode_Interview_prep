@@ -15,14 +15,17 @@ public:
             {
                 if(mat[i][j]==0)
                 {
-                    q.push({i,j});//if the element is zero then push it into the queue
+                    //q.push({i,j});//if the element is zero then push it into the queue
                     ans[i][j]=0;//and distance will be 0 
+                    q.push({i,j});
                 }
                 
             }
         }
+        
         int m=mat.size();
         int n=mat[0].size();
+        
         while(!q.empty())//do this till q is not empty
         {
              int i=q.front().first;
@@ -33,17 +36,17 @@ public:
                  ans[i+1][j]=ans[i][j]+1;//value is 1 added to the current value
                  q.push({i+1,j});
              }
-             if(checkValid(i,j+1,m,n)&& ans[i][j+1]==-1)
+             if(checkValid(i,j+1,m,n) && ans[i][j+1]==-1)
              {
                  ans[i][j+1]=ans[i][j]+1;
                  q.push({i,j+1});
              }
-             if(checkValid(i-1,j,m,n)&& ans[i-1][j]==-1)
+             if(checkValid(i-1,j,m,n) && ans[i-1][j]==-1)
              {
                  ans[i-1][j]=ans[i][j]+1;
                  q.push({i-1,j});
              }
-             if(checkValid(i,j-1,m,n)&& ans[i][j-1]==-1)
+             if(checkValid(i,j-1,m,n) && ans[i][j-1]==-1)
              {
                  ans[i][j-1]=1+ans[i][j];
                  q.push({i,j-1});
