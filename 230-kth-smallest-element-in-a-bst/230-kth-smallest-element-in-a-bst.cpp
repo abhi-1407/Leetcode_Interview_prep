@@ -10,25 +10,23 @@
  * };
  */
 class Solution {
-private:
-    void solve(TreeNode* root,int &k,int &ans)
+    void helper(TreeNode *root,int &k,int &ans)//note k needs to be passed by reference
     {
         if(!root)
-            return ;
-        solve(root->left,k,ans);
+            return;
+        helper(root->left,k,ans);
         k--;
-        if(!k)
+        if(k==0)
         {
             ans=root->val;
+            return;
         }
-        solve(root->right,k,ans);
+        helper(root->right,k,ans);
     }
-    
 public:
     int kthSmallest(TreeNode* root, int k) {
-        
         int ans;
-        solve(root,k,ans);
+        helper(root,k,ans);
         return ans;
     }
 };
