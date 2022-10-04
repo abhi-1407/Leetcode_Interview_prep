@@ -10,34 +10,53 @@
  * };
  */
 class Solution {
-    void helper(TreeNode *root,string s,vector<string> &ans)
+//     void helper(TreeNode *root,string s,vector<string> &ans)
+//     {
+//         if(!root)
+//         {
+//             return;
+//         }
+//         /* add the strings from root to leaf path */
+//         if(root->left==NULL and root->right==NULL)
+//         {
+//             s+=to_string(root->val);
+//             ans.push_back(s);
+//         }
+//         /* add the current value */
+//         s+=to_string(root->val);
+//         helper(root->left,s,ans);
+//         helper(root->right,s,ans);
+        
+//     }
+public:
+    // int sumNumbers(TreeNode* root) {
+    //     vector<string> ans;
+    //     string s="";
+    //     helper(root,s,ans);
+    //     int sum=0;
+    //     for(auto it:ans)
+    //     {
+    //         sum+=stoi(it);   
+    //     }
+    //     return sum;
+    // }
+    void helper(TreeNode *root,long long sum,long long &ans)
     {
         if(!root)
-        {
             return;
-        }
-        /* add the strings from root to leaf path */
         if(root->left==NULL and root->right==NULL)
         {
-            s+=to_string(root->val);
-            ans.push_back(s);
+            sum=sum*10+root->val;
+            ans+=sum;
         }
-        /* add the current value */
-        s+=to_string(root->val);
-        helper(root->left,s,ans);
-        helper(root->right,s,ans);
-        
+        sum=sum*10+root->val;
+        helper(root->left,sum,ans);
+        helper(root->right,sum,ans);
     }
-public:
-    int sumNumbers(TreeNode* root) {
-        vector<string> ans;
-        string s="";
-        helper(root,s,ans);
-        int sum=0;
-        for(auto it:ans)
-        {
-            sum+=stoi(it);   
-        }
-        return sum;
+    int sumNumbers(TreeNode *root)
+    {
+        long long sum=0,ans=0;
+        helper(root,sum,ans);
+        return ans;
     }
 };
