@@ -1,46 +1,38 @@
 class Solution {
-    int pivot(vector<int>& nums)
-    {
-        int s=0;
-        int e=nums.size()-1;
-        while(s<e)
-        {
-            int mid=s+(e-s)/2;
-            if(nums[mid]>=nums[0])
-                s=mid+1;
-            else
-                e=mid;
-        }
-        return s;
-    }
-    int binarySearch(vector<int> nums,int s,int e,int target)
-    {
-        while(s<=e)
-            {
-                int mid=s+(e-s)/2;
-                if(nums[mid]==target)
-                   return mid;
-                else if(nums[mid]<target)
-                    s=mid+1;
-                else
-                    e=mid-1;
-            }
-            return -1;
-    } 
+/* There is a chance that the array is left sorted or right sorted */
 public:
     int search(vector<int>& nums, int target) {
-        
-        int p=pivot(nums);        
-        if(target >=nums[p] and target<=nums[nums.size()-1])//second line
+        int l=0,r=nums.size()-1;
+        while(l<=r)
         {
-           return  binarySearch(nums,p,nums.size()-1,target);        
-        }  
-        
-        else//present on the first line
-        {
-            return binarySearch(nums,0,p-1,target);
-        }        
-        
-        
-   }
+            int mid=l+(r-l)/2;
+            if(nums[mid]==target)
+            return mid;
+            
+            if(nums[l]<=nums[mid])//array is sorted in the left in ascending order
+            {
+                if(nums[l]<=target and target<=nums[mid])
+                {
+                    r=mid-1;
+                }
+                else
+                {
+                    l=mid+1;
+                }
+            }
+            
+            else 
+            {
+                if(nums[mid]<=target && target<=nums[r])
+                {
+                    l=mid+1;
+                }
+                else
+                {
+                    r=mid-1;
+                }
+            }
+        }
+        return -1;
+    }
 };
