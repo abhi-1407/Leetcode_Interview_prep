@@ -11,35 +11,44 @@
  */
 class Solution {
     private:
-    void inorder(TreeNode *root,vector<int> &ans)
+    bool helper(TreeNode *root,unordered_set<int> &st,int k)
     {
-        if(root==NULL)
-            return;
-        inorder(root->left,ans);
-        ans.push_back(root->val);
-        inorder(root->right,ans);
+        if(!root)
+            return false;
+        if(st.find(k-(root->val))!=st.end())
+            return true;
+        st.insert(root->val);
+        return (helper(root->left,st,k) || helper(root->right,st,k));
     }
-    bool TwoSum(vector<int> temp,int k)
-    {
-        unordered_map<int,int> mpp;
-        for(int i=0;i<temp.size();i++)
-        {
-            mpp[temp[i]]=i;
-        }
-        for(int i=0;i<temp.size();i++)
-        {
-            int ele=k-temp[i];
-            if(mpp.find(ele)!=mpp.end() and mpp[ele]!=i)
-                return true;
-        }
-        return false;
-    }
+    // void inorder(TreeNode *root,vector<int> &ans)
+    // {
+    //     if(root==NULL)
+    //         return;
+    //     inorder(root->left,ans);
+    //     ans.push_back(root->val);
+    //     inorder(root->right,ans);
+    // }
+    // bool TwoSum(vector<int> temp,int k)
+    // {
+    //     unordered_map<int,int> mpp;
+    //     for(int i=0;i<temp.size();i++)
+    //     {
+    //         mpp[temp[i]]=i;
+    //     }
+    //     for(int i=0;i<temp.size();i++)
+    //     {
+    //         int ele=k-temp[i];
+    //         if(mpp.find(ele)!=mpp.end() and mpp[ele]!=i)
+    //             return true;
+    //     }
+    //     return false;
+    // }
 public:
     
     bool findTarget(TreeNode* root, int k) {
-        vector<int> ans;
-        inorder(root,ans);
-        int i=0,j=ans.size()-1;
+        // vector<int> ans;
+        // inorder(root,ans);
+        // int i=0,j=ans.size()-1;
         // while(i<j)
         // {
         //     int sum=ans[i]+ans[j];
@@ -53,7 +62,9 @@ public:
         //     i++;
         // }
         // return false;
-        return TwoSum(ans,k);
+        //return TwoSum(ans,k);
+        unordered_set<int> st;
+        return helper(root,st,k);
         
     }
 };
