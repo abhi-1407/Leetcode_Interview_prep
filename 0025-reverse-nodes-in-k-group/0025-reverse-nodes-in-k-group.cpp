@@ -36,7 +36,6 @@ public:
             curr=n;
             count++;
         }
-        if(curr)
         head->next=reverseKGroup(curr,k);        
         return prev;
     }
