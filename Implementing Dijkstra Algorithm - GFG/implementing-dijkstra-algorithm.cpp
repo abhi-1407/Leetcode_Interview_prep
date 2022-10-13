@@ -11,23 +11,49 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        pq.push({0,S});
+        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        // pq.push({0,S});
+        // vector<int> distance(V,INT_MAX);
+        // distance[S]=0;
+        // while(!pq.empty())
+        // {
+        //     int dist=pq.top().first;
+        //     int node=pq.top().second;
+        //     pq.pop();
+        //     for(auto it: adj[node])
+        //     {
+        //         int adjdist=it[1];
+        //         int adjnode=it[0];
+        //         if(adjdist + dist < distance[adjnode])
+        //         {
+        //             distance[adjnode]=dist+adjdist;
+        //             pq.push({distance[adjnode],adjnode});
+        //         }
+        //     }
+        // }
+        // return distance;
+        set<pair<int,int>> s;
+        s.insert({0,S});
         vector<int> distance(V,INT_MAX);
         distance[S]=0;
-        while(!pq.empty())
+        while(!s.empty())
         {
-            int dist=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
+            auto i=*(s.begin());//pull out the first node
+            int dist=i.first;
+            int node=i.second;
+            s.erase(s.begin());//remove this from the set
             for(auto it: adj[node])
             {
                 int adjdist=it[1];
                 int adjnode=it[0];
                 if(adjdist + dist < distance[adjnode])
                 {
+                    if(s.find({adjdist,adjnode})!=s.end())
+                    {
+                        s.erase({adjdist,adjnode});
+                    }
                     distance[adjnode]=dist+adjdist;
-                    pq.push({distance[adjnode],adjnode});
+                    s.insert({distance[adjnode],adjnode});
                 }
             }
         }
