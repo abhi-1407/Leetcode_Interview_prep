@@ -12,24 +12,25 @@ public:
                     q.push({i,j});
             }
         }
-        for(int i=0;i<grid.size();i++)
-        {
-            for(int j=0;j<grid[0].size();j++)
-            {
-                if(grid[i][j]==0)
-                    count++;
+//         for(int i=0;i<grid.size();i++)
+//         {
+//             for(int j=0;j<grid[0].size();j++)
+//             {
+//                 if(grid[i][j]==0)
+//                     count++;
                 
-            }
-        }
-        if(count==grid[0].size()*grid.size()) //edge case
-            return 0;
-        count=0;
+//             }
+//         }
+//         if(count==grid[0].size()*grid.size()) //edge case if you put count in the starting of the loop
+//             return 0;
+//         count=0;
         int dr[]={0,1,-1,0};
         int dc[]={1,0,0,-1};
         while(!q.empty())
         {
             
             int n=q.size();
+            bool flag=false;
             for(int i=0;i<n;i++)
             { 
                 auto it=q.front();
@@ -47,15 +48,17 @@ public:
                 {
                     if(grid[newr][newc]==1)
                     {
-                    grid[newr][newc]=2;
-                    q.push({newr,newc});                        
+                        flag=true;
+                        grid[newr][newc]=2;
+                        q.push({newr,newc});                        
                     }
-                }                    
                 }
-                
+                    
+                }               
             }    
-            count++;
             
+                if(flag)
+                    count++; 
         }
         for(int i=0;i<grid.size();i++)
         {
@@ -65,7 +68,7 @@ public:
                     return -1;
             }
         }
-        return count-1;
+        return count;
                  
     }
 };
