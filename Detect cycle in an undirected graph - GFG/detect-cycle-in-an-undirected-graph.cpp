@@ -4,14 +4,14 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-    bool dfs(int node,int parent,vector<bool> &visited,vector<int> adj[])
+    bool helper(int node,int parent,vector<int> adj[],vector<int> &visited)
     {
-        visited[node]=true;
+        visited[node]=1;
         for(auto it:adj[node])
         {
             if(!visited[it])
             {
-                if(dfs(it,node,visited,adj))
+                if(helper(it,node,adj,visited))
                 return true;
             }
             else if(parent!=it)
@@ -25,12 +25,12 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
-        vector<bool>visited(V,false);
+        vector<int> visited(V,0);
         for(int i=0;i<V;i++)
         {
             if(!visited[i])
             {
-                if(dfs(i,-1,visited,adj))
+                if(helper(i,-1,adj,visited))
                 return true;
             }
         }
