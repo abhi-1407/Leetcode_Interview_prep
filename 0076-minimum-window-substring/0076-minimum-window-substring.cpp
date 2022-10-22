@@ -22,6 +22,10 @@ public:
                     mpp2[s[j]]--;
                     j++;
                 }
+            }
+            if(st.size()==size)
+            {
+                
                 if(i-j+1<ans)
                 {
                     ans=i-j+1;
