@@ -30,6 +30,7 @@ public:
             }
         }
         int mini=INT_MAX;
+        int ans=-1;
         vector<int> count(n,0);
         for(int i=0;i<n;i++)
         {
@@ -41,15 +42,13 @@ public:
                     tempcount++;
                 }
             }
-            count[i]=tempcount;
-            mini=min(mini,tempcount);
+            if(tempcount<=mini)
+            {
+                ans=i;
+                mini=tempcount;
+            }
         }
-        for(int i=n-1;i>=0;i--)
-        {
-            if(count[i]==mini)
-                return i;
-        }
-        return 0;
+        return ans;
         
     }
 };
