@@ -98,10 +98,11 @@ public:
                 maxsize=max(maxsize,tempsize+1);// +1 for the zero that has been converted into 1                
             }
         }
-        for(int i=0;i<n*n;i++)
-        {
-            maxsize=max(maxsize,ds.size[ds.findPar(i)]);
-        }
+        maxsize=max(maxsize,ds.size[ds.findPar(0)]);
+        // for(int i=0;i<n*n;i++)//incase we have all 1s
+        // {
+        //     maxsize=max(maxsize,ds.size[ds.findPar(i)]);
+        // }
         return maxsize;
         
     }
