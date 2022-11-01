@@ -9,11 +9,8 @@ public:
         }        
         for(int i=1;i<n+1;i++)
         {
-            if(indegree[i]==n-1)
-            {
-                if(outdegree[i]==0)
-                    return i;
-            }
+            if(indegree[i]==n-1 && outdegree[i]==0)
+                return i;
         }        
         return -1;
         
