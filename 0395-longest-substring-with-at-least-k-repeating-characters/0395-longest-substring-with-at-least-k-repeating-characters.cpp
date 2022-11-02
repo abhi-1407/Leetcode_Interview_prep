@@ -13,7 +13,7 @@ class Solution {
         }
         if(index==s.size())//entire string can be taken
             return s.size();
-        int left=helper(s.substr(0,index),k);        
+        int left=helper(s.substr(0,index),k);
         while(index<s.size() && freq[s[index]-'a']<k)
         {
             index++;
