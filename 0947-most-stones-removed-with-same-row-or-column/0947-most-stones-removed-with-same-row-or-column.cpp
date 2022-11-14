@@ -40,9 +40,7 @@ class Disjoint{
           size[ulp_u]+=size[ulp_v];          
       }
         
-  }
-  
-  
+  } 
 };
 class Solution {
 public:
