@@ -1,48 +1,34 @@
 class Solution {
-public:
-    long long ans = 0;	
-	// Return total no.of children of the current node including itself
-    long long DFS(int src, int seats, vector<bool> &visited, vector<vector<int>> &graph){
-        visited[src] = true;
-        long long count = 1;
-        for(auto adj: graph[src]){
-            if(visited[adj]){
-                continue;
+public: 
+    int k;
+    long long ans=0;
+    long long dfs(vector<int>adj[],int node,int par){
+        long long count=1; //Count==>Total nodes in subtree with node as parent
+        for(int child:adj[node]){
+            if(child!=par){
+               count+=dfs(adj,child,node);
             }
-            count += DFS(adj, seats, visited, graph);
         }
-        
-        // If people less than seats, then one car is enough
-        if(count <= seats){
-            ans += 1;
-        }
-        // Otherwise, we need more cars
-        else{
-            long long cars = ceil(count/(seats*1.0));
-            ans += cars;
-        }
-        
+        ans+=ceil((double)count/k);  // Grouping people in same cars before returning to parent node
         return count;
+       
     }
-    
-    
     long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
-        // Creating graph
-        int n = roads.size();
-        vector<vector<int>> graph(n+1);
-        for(auto it: roads){
-            graph[it[0]].push_back(it[1]);
-            graph[it[1]].push_back(it[0]);
+        int n=roads.size()+1;
+        vector<int>adj[n];
+        for(auto &i:roads){
+            adj[i[0]].push_back(i[1]);
+             adj[i[1]].push_back(i[0]);
         }
+        k=seats;
+        long long ans1=0;
+       for(auto i:adj[0]){
+           long long a=dfs(adj,i,0);
+           ans1+=ans;
+           ans=0;
+       }
+        return ans1;
         
-        vector<bool> visited(n+1, false);
-        visited[0] = true;
         
-        // Call DFS for each children of capital node
-        for(auto it: graph[0]){
-            DFS(it, seats, visited, graph);
-        }
-        
-        return ans;
     }
 };
