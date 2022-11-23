@@ -3,12 +3,12 @@ class Solution {
     {
         int row=i,col=j;
         char ch=board[row][col];
-        for(int i=0;i<board.size();i++)
+        for(int i=0;i<9;i++)
         {
             if(board[i][col]==ch and i!=row)
                 return false;
         }
-        for(int i=0;i<board[0].size();i++)
+        for(int i=0;i<9;i++)
         {
             if(board[row][i]==ch and i!=col)
                 return false;
@@ -27,9 +27,9 @@ class Solution {
     }
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        for(int i=0;i<board.size();i++)
+        for(int i=0;i<9;i++)
         {
-            for(int j=0;j<board[0].size();j++)
+            for(int j=0;j<9;j++)
             {
                 if(board[i][j]!='.' and !isValid(i,j,board))
                 {
