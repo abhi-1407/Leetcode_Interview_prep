@@ -11,14 +11,8 @@ public:
             {
                mpp[win]=0; 
             }
-            if(mpp.count(lose)>0)
-            {
-                mpp[lose]++;
-            }
-            else
-            {
-                mpp[lose]=1;
-            }
+            mpp[lose]++;
+        
         }
         
         for(auto it:mpp)
