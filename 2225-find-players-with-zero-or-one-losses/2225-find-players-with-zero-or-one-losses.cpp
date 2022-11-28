@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
         map<int,int> mpp;
-        vector<vector<int>> ans;
         vector<int> one,two;
         for(auto it:matches)
         {
@@ -29,8 +28,6 @@ public:
             else if(it.second==1)
                 two.push_back(it.first);
         }
-        ans.push_back(one);
-        ans.push_back(two);
-        return ans;
+        return {one,two};
     }
 };
