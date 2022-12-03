@@ -16,7 +16,8 @@ public:
         for(auto it:p)
         {
             char ch=it.second;
-            while(it.first--)
+            int len=it.first;
+            while(len--)
             s[i++]=ch;
         }
         return s;       
