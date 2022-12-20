@@ -10,36 +10,29 @@
  * };
  */
 class Solution {
-    void leaf(vector<int> &ans,TreeNode *root)
+    void leaf(string &s,TreeNode *root)
     {
         if(!(root->left) && !(root->right))
         {
-            ans.push_back(root->val);
+            s+=to_string(root->val)+"#";
             return;
         }
         else
         {
             if(root->left)
-            leaf(ans,root->left);
+                leaf(s,root->left);
         
-        if(root->right)
-            leaf(ans,root->right);
+            if(root->right)
+                leaf(s,root->right);
             
         }
         
     }
 public:
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> ans1,ans2;
-        leaf(ans1,root1);
-        leaf(ans2,root2);
-        if(ans1.size()!=ans2.size())
-            return false;
-        for(int i=0;i<ans1.size();i++)
-        {
-            if(ans1[i]!=ans2[i])
-                return false;
-        }
-        return true;
+        string s1,s2;
+        leaf(s1,root1);
+        leaf(s2,root2);        
+        return s1==s2;
     }
 };
