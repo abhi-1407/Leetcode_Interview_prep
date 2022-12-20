@@ -1,39 +1,55 @@
-class Solution {
-    bool dfs(vector<vector<int>> &ans,int dest,int node,vector<bool> &visited)
+class Disjoint{
+    vector<int> size,parent;
+    public:
+    Disjoint(int n)
     {
-        visited[node]=true;
-        if(dest==node)
-            return true;
-        for(auto it:ans[node])
+        size.resize(n,1),parent.resize(n,0);
+        for(int i=0;i<n;i++)
         {
-            if(!visited[it])
-            {
-                if(dfs(ans,dest,it,visited))
-                    return true;
-            }
+            parent[i]=i;
         }
-        return false;
     }
-public:
-    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) 
+    int findPar(int u)
     {
-         vector<vector<int>> ans(n);
-         if(source==destination)
-             return true;
-         for(auto it:edges)
-         {
-             int a=it[0];
-             int b=it[1];
-             ans[a].push_back(b);
-             ans[b].push_back(a);
-         }
-        vector<bool> visited(n,false);
-        for(auto it:ans[source])
+        if(parent[u]==u)
+            return u;
+        return parent[u]=findPar(parent[u]);
+    }
+    void UnionBySize(int u,int v)
+    {
+        int ulp_u=findPar(u);
+        int ulp_v=findPar(v);
+        if(ulp_u==ulp_v)
+            return;
+        if(size[ulp_u]<size[ulp_v])
         {
-            if(dfs(ans,destination,it,visited))
-                return true;
+            parent[ulp_u]=ulp_v;
+            size[ulp_v]+=size[ulp_u];
         }
-        return false;
-            
+        else if(size[ulp_u]>size[ulp_v])
+        {
+            parent[ulp_v]=ulp_u;
+            size[ulp_u]+=size[ulp_v];
+        }
+        else
+        {
+            parent[ulp_v]=ulp_u;
+            size[ulp_u]+=size[ulp_v];
+        }
+        
+    }
+};
+class Solution {
+public:
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        Disjoint ds(n);
+        for(auto it:edges)
+        {
+            ds.UnionBySize(it[0],it[1]);
+        }
+        int a=ds.findPar(source);
+        int b=ds.findPar(destination);
+        return a==b;
+        
     }
 };
