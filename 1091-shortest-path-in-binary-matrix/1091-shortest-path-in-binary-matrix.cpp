@@ -15,24 +15,23 @@ public:
         
         while(!q.empty())
         {
-           auto temp=q.front();
-           q.pop();
-           int x=temp.first;
-           int y=temp.second;
-           for(int i=0;i<8;i++)
-           {
-               int newx=x+dr[i];
-               int newy=y+dc[i];
-               if(newx<0 || newy<0 || newx>=n || newy>=m || grid[newx][newy]==1)
-                   continue;
-               if(distance[x][y]+1 < distance[newx][newy])
-               {
-                   distance[newx][newy]=1+distance[x][y];
-                   q.push({newx,newy});
-               }
-               
-           }            
+            auto it=q.front();
+            q.pop();
+            int x=it.first;
+            int y=it.second;
+            for(int i=0;i<8;i++)
+            {
+                int xx=x+dr[i];
+                int yy=y+dc[i];
+                if(xx<0 || yy<0 || xx>n-1 || yy>n-1 || grid[xx][yy]!=0)
+                    continue;
+                if(distance[xx][yy]>1+distance[x][y])
+                {
+                    distance[xx][yy]=1+distance[x][y];
+                    q.push({xx,yy});
+                }
+            }
         }
-        return (distance[n-1][m-1]==1e9)?-1:distance[n-1][m-1];
+        return distance[n-1][n-1]==1e9 ? -1 : distance[n-1][n-1];
     }
 };
