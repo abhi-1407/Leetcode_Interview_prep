@@ -4,14 +4,12 @@ class BrowserHistory {
 public:
     BrowserHistory(string homepage) {
         history.push_back(homepage);
-        index+1;
     }
     
     void visit(string url) {
-        index+=1;
+        index++;
         history.resize(index);
         history.push_back(url);
-        
     }
     
     string back(int steps) {
