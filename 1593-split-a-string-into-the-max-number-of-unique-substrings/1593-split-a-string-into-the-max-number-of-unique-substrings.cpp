@@ -3,8 +3,8 @@ class Solution {
     {
         if(index==s.length())
         {
-            if(st.size() > maxi)
-                maxi=st.size();
+            if( (int) st.size() >maxi)
+                maxi=(int)st.size();
             return;
         }
         for(int i=index;i<s.length();i++)
@@ -22,7 +22,7 @@ class Solution {
 public:
     int maxUniqueSplit(string s) {
         set<string> st;
-        int maxi=0;
+        int maxi=INT_MIN;
         helper(0,st,s,maxi);
         return maxi;
     }
