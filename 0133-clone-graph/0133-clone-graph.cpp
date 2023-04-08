@@ -20,17 +20,27 @@ public:
 */
 
 class Solution {
-    unordered_map<Node*,Node*> mpp;
+    /* we need to make a correspondance from original node to the clone node */
+    unordered_map<Node*,Node*> mpp; 
 public:
     Node* cloneGraph(Node* node) {
         if(node==NULL)
-            return NULL;
-        if(mpp.find(node)==mpp.end())
+            return {};
+        mpp[node]=new Node(node->val,{});
+        queue<Node*> q;
+        q.push(node);
+        while(!q.empty())
         {
-            mpp[node]=new Node(node->val);
-            for(auto it:node->neighbors)
+            auto it=q.front();
+            q.pop();
+            for(auto i:it->neighbors)
             {
-                mpp[node]->neighbors.push_back(cloneGraph(it));
+                if(mpp.find(i)==mpp.end())
+                {
+                    mpp[i]=new Node(i->val,{});
+                    q.push(i);
+                }
+                mpp[it]->neighbors.push_back(mpp[i]);
             }
         }
         return mpp[node];
