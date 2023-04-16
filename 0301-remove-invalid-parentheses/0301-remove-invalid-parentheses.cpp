@@ -15,10 +15,7 @@ class Solution {
         }
         for(int i=0;i<s.length();i++)
         {
-            if (s[i] != ')' && s[i] != '(')
-            {
-                continue;
-            }
+            
             string a=s.substr(0,i);
             string b=s.substr(i+1);
             if(test.find(a+b)==test.end())
