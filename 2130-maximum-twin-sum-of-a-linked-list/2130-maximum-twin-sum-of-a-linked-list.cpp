@@ -26,14 +26,15 @@ public:
     int pairSum(ListNode* head) {
         if(!head->next->next)
             return head->val+head->next->val;
-        ListNode *slow=head,*fast=head->next;
+        ListNode *slow=head,*fast=head,*prev=head;
         while(fast && fast->next)
         {
+            prev=slow;
             slow=slow->next;
             fast=fast->next->next;
         }
-        slow->next=reverse(slow->next);
-        ListNode *p1=head,*p2=slow->next;
+        prev->next=reverse(prev->next);
+        ListNode *p1=head,*p2=prev->next;
         int maxsum=0;
         while(p1 && p2)
         {
