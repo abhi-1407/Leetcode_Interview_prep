@@ -1,11 +1,11 @@
 class DSU
 {
-    vector<int> parent,rank;
+    vector<int> parent,s;
     public:
     DSU(int size)
     {
         parent.resize(size);
-        rank.resize(size,0);
+        s.resize(size,1);
         for(int i=0;i<size;i++)
             parent[i]=i;
     }
@@ -20,18 +20,15 @@ class DSU
         int a=find(u),b=find(v);
         if(a==b)
             return false;
-        if(rank[a]<rank[b])
+        if(s[a]<s[b])
         {
             parent[a]=b;
+            s[a]+=s[b];
         }
-        else if(rank[a]>rank[b])
-        {
-            parent[b]=a;
-        }
-        else
+        else 
         {
             parent[a]=b;
-            rank[b]++;
+            s[b]+=s[a];
         }
         return true;
     }
