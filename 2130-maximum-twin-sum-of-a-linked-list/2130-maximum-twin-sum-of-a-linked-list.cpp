@@ -33,17 +33,16 @@ public:
             slow=slow->next;
             fast=fast->next->next;
         }
-        prev->next=reverse(prev->next);
+        prev->next=reverse(slow);
         ListNode *p1=head,*p2=prev->next;
-        int maxsum=0;
+        int maxi=INT_MIN;
         while(p1 && p2)
         {
-            int sum=(p1->val)+(p2->val);
-            maxsum=max(maxsum,sum);
+            int sum=p1->val+p2->val;
+            maxi=max(maxi,sum);
             p1=p1->next;
             p2=p2->next;
         }
-        return maxsum;
-        
+        return maxi;
     }
 };
