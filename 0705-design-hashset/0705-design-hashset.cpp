@@ -1,22 +1,22 @@
 class MyHashSet {
-    unordered_map<int,int> mpp;
+    vector<int> temp;
 public:
     MyHashSet() {
+        temp.resize(1e6+1,0);
     }
     
     void add(int key) {
-        if(mpp[key]==1)
-        return;
-        mpp[key]++;
+        if(temp[key]==0)
+        temp[key]++;
     }
     
     void remove(int key) {
-        if(mpp[key]==1)
-        mpp[key]--;
+        if(temp[key]==1)
+            temp[key]--;
     }
     
     bool contains(int key) {
-        return mpp[key]==1;
+        return temp[key]==1;
     }
 };
 
