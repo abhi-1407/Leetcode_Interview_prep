@@ -17,28 +17,21 @@ public:
         queue<TreeNode*> q;
         string temp="";
         string s="";
-        s+=to_string(root->val)+",";
         q.push(root);
         while(!q.empty())
         {
             TreeNode *temp=q.front();
             q.pop();
-            if(temp->left)
-            {
-                s+=to_string(temp->left->val)+",";
-                q.push(temp->left);
-            }
-            else
+            if(temp==NULL)
                 s+="#,";
-            if(temp->right)
+            else
+                s+=to_string(temp->val)+",";
+            if(temp!=NULL)
             {
-                s+=to_string(temp->right->val)+",";
+                q.push(temp->left);
                 q.push(temp->right);
             }
-            else
-                s+="#,";
         }
-        cout<<s<<" ";
         return s;
     }
 
