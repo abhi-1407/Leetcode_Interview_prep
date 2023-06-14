@@ -10,23 +10,21 @@
  * };
  */
 class Solution {
-    void helper(TreeNode *root,vector<int> &ans)
+    TreeNode *prev=NULL;
+    void helper(TreeNode *root,int &ans)
     {
         if(!root)
             return;
         helper(root->left,ans);
-        ans.push_back(root->val);
+        if(prev!=NULL)
+            ans=min(ans,abs(prev->val-root->val));
+        prev=root;
         helper(root->right,ans);
     }
 public:
     int getMinimumDifference(TreeNode* root) {
-        vector<int> ans;
+        int ans=INT_MAX;
         helper(root,ans);
-        int temp=INT_MAX;
-        for(int i=1;i<ans.size();i++)
-        {
-            temp=min(temp,abs(ans[i]-ans[i-1]));
-        }
-        return temp;
+        return ans;
     }
 };
