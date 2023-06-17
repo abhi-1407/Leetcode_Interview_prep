@@ -1,23 +1,27 @@
 class Solution {
 public:
-    int mx,n,m;
-    int solve(vector<int>&a,vector<int>&b,vector<vector<int>>&dp,int i,int j,int x){
-        if(i>=n)return 0;
-        j=upper_bound(b.begin()+j,b.end(),x)-b.begin();
-        if(j==m && a[i]<=x)return mx;
-        if(dp[i][j]!=-1)return dp[i][j];
-        int take=mx,notTake=mx;
-        if(j<m)take=solve(a,b,dp,i+1,j+1,b[j])+1;
-        if(a[i]>x)notTake=solve(a,b,dp,i+1,j,a[i]);
-        return dp[i][j]=min(take,notTake);
+    vector<vector<long>> dp;
+    long fun(int idx1,int prevIdx,int n,int m,vector<int>& arr1,vector<int>& arr2){
+        if(idx1 == n) return 0;
+        if(dp[idx1][prevIdx] != -1) return dp[idx1][prevIdx];  
+        if(prevIdx == 0){
+            int prevElement = (idx1 == 0) ? INT_MIN : arr1[idx1-1];
+            int idx2 = upper_bound(arr2.begin(),arr2.end(),prevElement)-arr2.begin();
+            long op1 = (prevElement<arr1[idx1]) ? fun(idx1+1,0,n,m,arr1,arr2):INT_MAX;
+            long op2 = (idx2 == m) ? INT_MAX:1+fun(idx1+1,idx2+1,n,m,arr1,arr2);
+            return dp[idx1][prevIdx] = min(op1,op2);
+        }
+        int prevElement=arr2[prevIdx-1];
+        int idx2 = upper_bound(arr2.begin(),arr2.end(),prevElement)-arr2.begin();
+        long op1 = (prevElement<arr1[idx1])? fun(idx1+1,0,n,m,arr1,arr2): INT_MAX;
+        long op2 = (idx2==m)? INT_MAX: 1+fun(idx1+1,idx2+1,n,m,arr1,arr2);
+        return dp[idx1][prevIdx]=min(op1,op2);
     }
-    int makeArrayIncreasing(vector<int>& a, vector<int>&b) {
-        n=a.size(),m=b.size();
-        mx=m+1;
-        sort(b.begin(),b.end());
-        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-        int x=solve(a,b,dp,0,0,-1);
-        if(x==mx)return -1;
-        return x;
+    int makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2) {
+        int n = arr1.size(),m=arr2.size();
+        sort(arr2.begin(),arr2.end());
+        dp = vector<vector<long>> (n+1,vector<long>(m+1,-1));
+        long res = fun(0,0,n,m,arr1,arr2);
+        return res >= INT_MAX?-1:(int)res;
     }
 };
