@@ -2,19 +2,24 @@ class Solution {
 public:
     vector<int> findPeakGrid(vector<vector<int>>& mat) {
         int n=mat.size();
-        int l=0,r=n-1;
-        while(l<=r)
+        int top=0,bottom=n-1;
+        while(top<=bottom)
         {
-            int midRow=l+(r-l)/2;
-            int midCol=max_element(mat[midRow].begin(),mat[midRow].end())-mat[midRow].begin();
-            if(midRow < n-1 && mat[midRow][midCol]<mat[midRow+1][midCol])
-                l=midRow+1;
-            else if(midRow > 0 && mat[midRow][midCol]<mat[midRow-1][midCol])
-                r=midRow-1;
-            else
-                return {midRow,midCol};
+            int mid_row=top+(bottom-top)/2;
+            int col=max_element(mat[mid_row].begin(),mat[mid_row].end())-mat[mid_row].begin();
+            if(mid_row-1>=0 && mat[mid_row-1][col]>mat[mid_row][col])
+            {
+                bottom=mid_row-1;
+            }
+            else if(mid_row+1<n && mat[mid_row+1][col]>mat[mid_row][col])
+            {
+                top=mid_row+1;
+            }
+            else // peak found
+            {
+                return {mid_row,col};
+            }
         }
         return {-1,-1};
-       
     }
 };
