@@ -11,7 +11,7 @@ public:
         }
         visited[start]=0.0000;
         pq.push({1.0000,start});
-        while(pq.size())
+        while(!pq.empty())
         {
             double cost=pq.top().first;
             int node=pq.top().second;
