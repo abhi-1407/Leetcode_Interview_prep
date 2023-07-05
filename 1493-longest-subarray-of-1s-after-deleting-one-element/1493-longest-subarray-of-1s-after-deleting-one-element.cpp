@@ -1,9 +1,6 @@
 class Solution {
 public:
     int longestSubarray(vector<int>& nums) {
-        vector<int> temp={1,0,0,0,0};
-        if(nums==temp)
-            return 1;
         int i=0,j=0,countzero=0,ans=0,length=0;
         while(j<nums.size())
         {
@@ -22,10 +19,7 @@ public:
                     }
                 }
             }
-            else
-            {
-                ans=max(ans,j-i+1-1);
-            }
+            ans=max(ans,j-i+1-1);
             j++;
         }
         return ans;
