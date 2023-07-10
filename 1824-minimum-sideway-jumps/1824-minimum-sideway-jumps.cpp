@@ -3,8 +3,8 @@ class Solution {
     {
         if(i==n-1) 
             return 0;
-        if(obstacles[i]-1==j)
-            return 1e8;
+        // if(obstacles[i]-1==j)
+        //     return 1e8;
         if(dp[i][j]!=-1)
             return dp[i][j];
         if(obstacles[i+1]-1!=j)
@@ -12,7 +12,7 @@ class Solution {
         int ans=1e8;
         for(int k=0;k<3;k++)
         {
-            if(obstacles[i]-1!=k)
+            if(obstacles[i]-1!=k && obstacles[i+1]-1!=k)
             ans=min(ans,1+helper(obstacles,i+1,k,n,dp));
         }
         return dp[i][j]=ans;
