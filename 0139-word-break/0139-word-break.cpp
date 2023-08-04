@@ -11,7 +11,7 @@ class Solution {
             temp+=s[i];
             if(st.find(temp)!=st.end() && helper(i+1,s,st,dp))
             {
-                return dp[i]=true;
+                return dp[index]=true;
             }
         }
         return dp[index]=false;
