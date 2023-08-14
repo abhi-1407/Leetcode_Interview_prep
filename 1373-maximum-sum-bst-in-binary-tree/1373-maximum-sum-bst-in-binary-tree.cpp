@@ -14,6 +14,11 @@ class Solution {
     {
         if(!root)
             return {0,{INT_MAX,INT_MIN}};
+        if(root->left==NULL && root->right==NULL)
+        {
+            maxi=max(maxi,root->val);
+            return {root->val,{root->val,root->val}};
+        }
         auto l=helper(root->left,maxi);
         auto r=helper(root->right,maxi);
         pair<int,pair<int,int>> p;
