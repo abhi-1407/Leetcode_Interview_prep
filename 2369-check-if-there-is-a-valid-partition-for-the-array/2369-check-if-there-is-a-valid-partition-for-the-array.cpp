@@ -1,25 +1,28 @@
 class Solution {
-
+    bool helper(vector<int> &nums,int index,vector<int> &dp)
+    {
+        if(index==nums.size())
+            return true;
+        if(dp[index]!=-1)
+            return dp[index];
+        bool flag=false;
+        if(index+1<nums.size())
+        {
+            if(nums[index]==nums[index+1])
+                flag=flag|(helper(nums,index+2,dp));
+        }
+        if(index+2<nums.size())
+        {
+            if(nums[index]==nums[index+1] && nums[index+1]==nums[index+2])
+                flag=flag|(helper(nums,index+3,dp));
+            else if(nums[index]+1==nums[index+1] && nums[index+1]+1==nums[index+2])
+                flag=flag|(helper(nums,index+3,dp));
+        }
+        return dp[index]=flag;
+    }
 public:
-   bool func(int idx,vector<int> &v, vector<int> &dp){
-    int n=v.size();
-    
-    if(idx==n) return true;
-    if(idx>n) return false;
-    
-    if(dp[idx]!=-1) return dp[idx];
-    
-    bool flag1 = false, flag2 = false, flag3 = false;
-
-    if(idx+1<n && v[idx]==v[idx+1])                             flag1 = func(idx+2,v,dp);
-    if(idx+2<n && v[idx]==v[idx+1] && v[idx]==v[idx+2])         flag2 = func(idx+3,v,dp);
-    if(idx+2<n && v[idx]+1==v[idx+1] && v[idx+1]+1 == v[idx+2]) flag3 = func(idx+3,v,dp);
-    
-    return dp[idx] =  flag1 || flag2 || flag3 ;
-}
-
-bool validPartition(vector<int>& v) {
-    vector<int> dp(v.size(),-1);
-    return func(0,v,dp);
-}
+    bool validPartition(vector<int>& nums) {
+        vector<int> dp(nums.size(),-1);
+        return helper(nums,0,dp);
+    }
 };
