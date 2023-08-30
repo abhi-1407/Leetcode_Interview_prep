@@ -12,42 +12,40 @@
 
 #define ll long long
 class Solution {
-
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        if(root==NULL)
-            return 0;
-        int maxi=INT_MIN;
-        queue<pair<TreeNode *,int>> q;
+        queue<pair<TreeNode *,ll>> q;
+        int maxi=0;
         q.push({root,0});
         while(!q.empty())
         {
-            int n=q.size();
-            int m=q.front().second;
-            int left,right;
-            for(int i=0;i<n;i++)
+            ll off=q.front().second;
+            int size=q.size();
+            int l=0,r=0;
+            for(int i=0;i<size;i++)
             {
-                ll index=q.front().second-m;
-                TreeNode *t=q.front().first;
+                auto it=q.front();
                 q.pop();
+                TreeNode *n=it.first;
+                ll pos=it.second;
                 if(i==0)
                 {
-                    left=index;
+                    l=pos-off;
                 }
-                if(i==n-1)
+                if(i==size-1)
                 {
-                    right=index;
+                    r=pos-off;
                 }
-                if(t->left)
+                if(n->left)
                 {
-                    q.push({t->left,2*index});
+                    q.push({n->left,2*(pos-off)+1});
                 }
-                if(t->right)
+                if(n->right)
                 {
-                    q.push({t->right,2*index+1});
+                    q.push({n->right,2*(pos-off)+2});
                 }
             }
-            maxi=max(maxi,right-left+1);
+            maxi=max(maxi,(int)r-l+1);
         }
         return maxi;
     }
