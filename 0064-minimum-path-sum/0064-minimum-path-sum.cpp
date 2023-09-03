@@ -7,9 +7,10 @@ class Solution {
             return 1e9;
         if(dp[i][j]!=-1)
             return dp[i][j];
-        int right=helper(grid,i,j+1,dp);
-        int down=helper(grid,i+1,j,dp);
-        return dp[i][j]=grid[i][j]+min(right,down);
+        int right=helper(grid,i,j+1,dp)+grid[i][j];
+        int down=helper(grid,i+1,j,dp)+grid[i][j];
+        return dp[i][j]=min(right,down);
+        
     }
 public:
     int minPathSum(vector<vector<int>>& grid) {
