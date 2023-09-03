@@ -3,13 +3,15 @@ class Solution {
     {
         if(amount==0)
             return 1;
-        if(index==0)
-        {
-            if(amount%coins[index]==0)
-                return 1;
-            else
-                return 0;
-        }
+        if(index<0)
+            return 0;
+        // if(index==0)
+        // {
+        //     if(amount%coins[index]==0)
+        //         return 1;
+        //     else
+        //         return 0;
+        // }
         if(dp[index][amount]!=-1)
             return dp[index][amount];
         int pick=0;
