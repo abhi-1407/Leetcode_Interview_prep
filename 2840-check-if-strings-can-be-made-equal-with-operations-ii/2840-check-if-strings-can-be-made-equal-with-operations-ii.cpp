@@ -1,21 +1,21 @@
 class Solution {
 public:
     bool checkStrings(string s1, string s2) {
-         int n=s1.size();
-        map<char,int> m11, m12, m21, m22;
-        for(int x=0; x<n; x++)
+        unordered_map<char,int> mpp1,mpp2,mpp3,mpp4;
+        for(int i=0;i<s1.length();i++)
         {
-            if(x%2)
-            {
-                m11[s1[x]]++;
-                m21[s2[x]]++;
-            }
+            if(i%2==0)
+                mpp1[s1[i]]++;
             else
-            {
-                m12[s1[x]]++;
-                m22[s2[x]]++;
-            }
+                mpp2[s1[i]]++;
         }
-        return m11==m21 && m12==m22;
+        for(int i=0;i<s2.length();i++)
+        {
+            if(i%2==0)
+                mpp3[s2[i]]++;
+            else
+                mpp4[s2[i]]++;
+        }
+        return (mpp1==mpp3 && mpp2==mpp4);
     }
 };
