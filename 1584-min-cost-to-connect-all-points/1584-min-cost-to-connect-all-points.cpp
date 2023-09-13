@@ -3,7 +3,6 @@ class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
         int n=points.size(),sum=0;
-        sort(points.begin(),points.end());
         vector<ll> visited(n,0);
         vector<ll> distance(n,LLONG_MAX);
         priority_queue<vector<ll>,vector<vector<ll>>,greater<vector<ll>>>pq;
