@@ -14,10 +14,8 @@ public:
         }
     }
     
-    //Entry function
     int findBottomLeftValue(TreeNode* root) {
         int maxDepth = 0;
-        //Initialize leftVal with root's value to cover the edge case with single node
         int leftVal = root->val;
         helper(root, maxDepth, leftVal, 0);
         return leftVal;
