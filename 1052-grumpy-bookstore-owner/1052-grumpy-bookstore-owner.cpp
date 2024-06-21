@@ -2,6 +2,7 @@ class Solution {
 public:
     int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
         int i=0,j=0,n=customers.size(),maxi=INT_MIN,curr=0;
+        
         for(int i=0;i<n;i++)
         {
             if(grumpy[i]==0)
@@ -21,7 +22,6 @@ public:
                     curr-=customers[i];
                 }
                 i++;
-                
             }
             j++;
         }
