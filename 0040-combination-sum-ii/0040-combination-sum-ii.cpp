@@ -4,6 +4,9 @@ class Solution {
         if(target==0)
             {
                 ans.push_back(temp);
+                for(auto it:temp)
+                    cout<<it<<" ";
+                    
             return;
             }
         if(target<0)
