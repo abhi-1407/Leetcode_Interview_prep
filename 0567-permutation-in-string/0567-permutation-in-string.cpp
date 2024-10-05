@@ -1,4 +1,3 @@
-/*to make it go one back as the while loop breaks after the condition gets unsatisfied,so we need to make it satisfied so i--*/
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
