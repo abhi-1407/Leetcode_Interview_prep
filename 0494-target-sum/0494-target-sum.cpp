@@ -19,6 +19,7 @@ class Solution {
         sum+=nums[index];
         return dp[index][sum+1001]=plus+minus;
     }
+    
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int sum=0;
